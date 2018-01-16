@@ -7,7 +7,7 @@ These functions return a vector where the ith element is the number of times the
 
 ## greedy solution
 
-In this solution we iterate through the coins ordered by descending value, repeatedly selecting the largest coin that does not exceed the remaining amount.
+In this solution we iterate through the coins ordered by descending value, repeatedly selecting the largest coin that does not exceed the remaining amount. It is assumed that `amount` is nonnegative and `coins` are positive and in descending order.
 
 ```c++
 auto greedy(int amount, vector<int> const& coins) -> vector<int> {
@@ -25,9 +25,14 @@ auto greedy(int amount, vector<int> const& coins) -> vector<int> {
 
 ## dynamic programming solution
 
-In this solution we use the fact that the optimal solution for amount _A_ that uses coin _C_ is _C_ plus the optimal solution for amount _A_ - _C_. Therefore we can solve the problem recursively. And we use memoization to avoid repeatedly solving subproblems.
+In this solution we use the fact that the optimal solution for amount _A_ that uses coin _C_ is _C_ plus the optimal solution for amount _A_ - _C_. Therefore we can solve the problem recursively. And we use memoization to avoid repeatedly solving subproblems. It is assumed that `amount` is nonnegative and `coins` are positive and in descending order.
 
 ```c++
+auto dynamic(int amount, vector<int> const& coins) -> vector<int> {
+  auto cache = vector<vector<int>>(amount + 1);
+  return dynamic(amount, coins, cache);
+}
+
 auto dynamic(int amount, vector<int> const& coins, vector<vector<int>>& cache) -> vector<int> {
   // base case, nothing to do
   if (amount == 0) return vector<int>(size(coins) + 1);
@@ -49,10 +54,5 @@ auto dynamic(int amount, vector<int> const& coins, vector<vector<int>>& cache) -
   // update cache and return solution
   swap(cache[amount], soln);
   return cache[amount];
-}
-
-auto dynamic(int amount, vector<int> const& coins) -> vector<int> {
-  auto cache = vector<vector<int>>(amount + 1);
-  return dynamic(amount, coins, cache);
 }
 ```
