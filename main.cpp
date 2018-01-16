@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-namespace changemaking {
+namespace change {
 
   auto greedy(int amount, vector<int> const& coins) -> vector<int> {
     auto soln = vector<int>(size(coins) + 1);
@@ -46,7 +46,7 @@ namespace changemaking {
     return dynamic(amount, coins, cache);
   }
 
-} // namespace changemaking
+} // namespace change
 
 int main(int ac, char** av) {
   auto amount = 0;
@@ -60,7 +60,7 @@ int main(int ac, char** av) {
   sort(begin(coins), end(coins), greater<int>{});
   if (empty(coins) || coins.back() != 1) coins.push_back(1);
 
-  auto soln = changemaking::dynamic(amount, coins);
+  auto soln = change::dynamic(amount, coins);
   cout << soln.back() << ' ';
   for (auto i = 0; i != size(coins); i++) {
     cout << coins[i] << ',' << soln[i] << ' ';
