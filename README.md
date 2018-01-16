@@ -1,11 +1,13 @@
 # change making problem
 Greedy and dynamic programming solutions to the change making problem.
 
+Given a set of coin denominations and an unlimited supply of each coin, find the smallest set of coins (fewest coins) that sums to a given amount. The denominations include a unit coin, so a solution exists for every amount.
+
 These functions return a vector where the ith element is the number of times the ith coin is used in the solution, except for the last element, which is the total number of coins used.
 
 ## greedy solution
 
-In this solution we iterate through the coins in descending order, repeatedly selecting the largest coin that does not exceed the remaining amount.
+In this solution we iterate through the coins ordered by descending value, repeatedly selecting the largest coin that does not exceed the remaining amount.
 
 ```c++
 namespace changemaking {
@@ -27,7 +29,7 @@ namespace changemaking {
 
 ## dynamic programming solution
 
-In this solution we use the fact that the optimal solution for amount _A_ that uses coin _C_ is _C_ plus the optimal solution for amount _A_ - _C_. Therefore we can solve the problem recursively. We also use memoization to avoid repeatedly solving subproblems.
+In this solution we use the fact that the optimal solution for amount _A_ that uses coin _C_ is _C_ plus the optimal solution for amount _A_ - _C_. Therefore we can solve the problem recursively. And we use memoization to avoid repeatedly solving subproblems.
 
 ```c++
 namespace changemaking {
